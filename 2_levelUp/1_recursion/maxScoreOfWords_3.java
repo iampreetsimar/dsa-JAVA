@@ -1,4 +1,4 @@
-// Given a list of words, a list of alphabets(might be repeating) and score each alphabet from a to z.
+// Given a list of words, a list of alphabets(might be repeating) and score of each alphabet from a to z.
 // Find max score of any valid set of words formed by using the given alphabets.
 
 // NOTE: - A word cannot be used more than one time.
