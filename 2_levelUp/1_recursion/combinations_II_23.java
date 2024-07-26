@@ -30,8 +30,8 @@ public class combinations_II_23 {
 
     // OBJECT/ITEM CHOOSES BOX APPROACH
     // permutations I -> by reducing arrangements -> combinations II
-    // level-options -> levels are items from 1-rItems which are DISTINCT
-    //               -> valid options are boxes after last filled box(will always be empty)
+    // level-options -> levels are items numbered 1-r but actually IDENTICAL
+    //               -> valid options are boxes(always empty) after last filled box
     // if an item is placed in a box, valid options are only those boxes which come after the last filled box
     // lastFilledBox: the idx of box which was filled last so newer items chooses box which come after it
     // lastFilledBox reduces arrangements and only selections are formed
