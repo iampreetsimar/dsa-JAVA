@@ -8,8 +8,8 @@
 // ab
 // ac
 // ba
-// ca
 // bc
+// ca
 // cb
 
 import java.io.BufferedReader;
