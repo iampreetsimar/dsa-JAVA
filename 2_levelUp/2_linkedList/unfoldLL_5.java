@@ -1,9 +1,9 @@
-// Given a SLL, fold  the ll. 
+// Given a SLL, unfold  the ll. 
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class foldLL_4 {
+public class unfoldLL_5 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] parts = br.readLine().split(" ");
@@ -15,7 +15,7 @@ public class foldLL_4 {
         }
 
         ListNode head = dummyNode.next;
-        foldList(head);
+        unfoldList(head);
         displayList(head);
     }
 
@@ -36,17 +36,6 @@ public class foldLL_4 {
         }
     }
 
-    public static ListNode getMidNode(ListNode node) {
-        if(node == null || node.next == null) return node;
-
-        ListNode slow = node, fast = node;
-        while(fast.next != null && fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        return slow;
-    }
-
     public static ListNode reverseList(ListNode node) {
         if(node == null || node.next == null) return node;
 
@@ -60,23 +49,22 @@ public class foldLL_4 {
         return prev;
     }
 
+    // use reverseList()
     // TC: O(N) | SC: constant
-    public static void foldList(ListNode node) {
-        if(node == null || node.next == null) return;   // edge case: list size:0/1
+    public static void unfoldList(ListNode node) {
+        if(node == null || node.next == null || node.next.next == null) return; // edge cases: list size 0/1/2
 
-        ListNode mid = getMidNode(node);    // returns mid node of list ~ O(N)
-        ListNode newHead = mid.next;
-        mid.next = null;    // detach two halves
-
-        newHead = reverseList(newHead);     // reverse second half | T(N/2) ~ O(N)
+        ListNode newHead = node.next;   // 1st node as start of second half list
 
         ListNode p1 = node, p2 = newHead;
-        while(p2 != null) {  // second half list will reach null faster or at same time as first half list | T(N/2) ~ O(N)
-            ListNode nbr1 = p1.next, nb2 = p2.next;
-            p1.next = p2;   
-            p2.next = nbr1;
-            p1 = nbr1;
-            p2 = nb2;
-        }
+        while(p2 != null && p2.next != null) {  // since p2 reaches null faster in case of odd size list, check p2.next instead of p2
+            p1.next = p1.next.next;
+            p2.next = p2.next.next;
+            p1 = p1.next;
+            p2 = p2.next;
+        }   // ~ T(N)
+
+        newHead = reverseList(newHead); // reverse second half list starting from newHead | ~T(N/2)
+        p1.next = newHead;  // merge both halves | OG list head remains same
     }
 }
